@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Dashboard</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+body{
+display:flex;
+font-family:Segoe UI;
+background:#f4f4f4;
+}
+
+.sidebar{
+width:220px;
+background:#26a69a;
+height:100vh;
+color:white;
+padding:20px;
+}
+
+.sidebar a{
+display:block;
+color:white;
+margin:15px 0;
+text-decoration:none;
+}
+
+.content{
+flex:1;
+padding:40px;
+}
+
+.stat-card{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 4px 15px rgba(0,0,0,0.1);
+text-align:center;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h4 class="mb-4">Admin Panel</h4>
+
+<a href="/dashboard">Dashboard</a>
+
+<a href="/requests">Customer Requests</a>
+
+<a href="/analytics">Analytics</a>
+
+<a href="/export">Export Excel</a>
+
+<a href="/">Logout</a>
+
+</div>
+
+<div class="content">
+
+<h3 class="mb-4">Dashboard</h3>
+
+<div class="row mb-4">
+
+<div class="col-md-4">
+<div class="card p-3 text-center shadow-sm">
+<h6>Total Requests</h6>
+<h3>{{ total_requests }}</h3>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="card p-3 text-center shadow-sm">
+<h6>Total Customers</h6>
+<h3>{{ total_users }}</h3>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="card p-3 text-center shadow-sm">
+<h6>Most Requested</h6>
+<h3>
+{% if most_service %}
+{{ most_service[0] }}
+{% else %}
+No Data
+{% endif %}
+</h3>
+</div>
+</div>
+
+</div>
+
+<!-- Chart -->
+
+<canvas id="myChart" height="100"></canvas>
+
+<script>
+
+const labels = [
+    {% for row in chart_data %}
+        "{{ row[0] }}",
+    {% endfor %}
+];
+
+const values = [
+    {% for row in chart_data %}
+        {{ row[1] }},
+    {% endfor %}
+];
+
+const data = {
+    labels: labels,
+    datasets: [{
+        label: 'Requests',
+        data: values,
+        backgroundColor: "#26a69a"
+    }]
+};
+
+const config = {
+    type: 'bar',
+    data: data
+};
+
+new Chart(document.getElementById('myChart'), config);
+
+</script>
+
+</div> 
+
+<button onclick="history.back()" 
+style="position:fixed; bottom: 60px;; left:60px; z-index:999;"
+class="btn btn-dark">
+<h1>BACK⬅️</h1>
+</button>
+
+</body>
+</html>

@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Step Public Services</title>
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+
+
+.form-control{
+    border-radius:10px;
+    border:1px solid #ddd;
+    transition:0.3s;
+}
+
+.form-control:focus{
+    border-color:#00c853;
+    box-shadow:0 0 10px rgba(0,200,83,0.3);
+}
+
+    /*زر متحرك (Neon Butto*/
+
+.btn-success{
+    background: linear-gradient(45deg,#26a69a,#00e676);
+    border:none;
+    transition:0.3s;
+}
+
+.btn-success:hover{
+    box-shadow:0 0 15px #00e676, 0 0 30px #00e676;
+    transform: scale(1.05);
+}
+
+    /* animation for icons*/
+.service-card:hover .service-icon{
+    transform: rotate(10deg) scale(1.2);
+    transition: 0.3s;
+}
+
+/*animation for card /**/
+.service-card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+    text-align:center;
+
+    transition: all 0.3s ease;
+}
+
+/* ✨ Hover Effect */
+.service-card:hover{
+    transform: translateY(-8px) scale(1.02);
+    box-shadow:0 15px 30px rgba(0,0,0,0.15);
+}
+
+    .service-card{
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+/* ل كارد بنفس الحجم*/
+    .service-card{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+text-align:center;
+height:100%;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+}
+
+
+body{
+background: linear-gradient(135deg,#26a69a,#90d1cd,#ffffff);
+color:black(0, 0, 0);
+}
+
+/*navbar blur*/
+.navbar-custom{
+    position: sticky;
+    top: 15px; /* 👈 يخليه نازل شوي عن الحافة */
+    z-index: 1000;
+
+    width: 95%;
+    margin: auto;
+
+    background: rgba(38, 166, 154, 0.7); /* لونك مع شفافية */
+    backdrop-filter: blur(12px);
+
+    border-radius: 20px; /* 👈 الزوايا المنحنية */
+    padding: 10px 20px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.352);
+
+    border: 1px solid rgba(0, 178, 172, 0.198);
+
+    transition: 0.3s;
+}
+
+/* ✨ Hover خفيف */
+.navbar-custom:hover{
+    background: rgba(38, 166, 154, 0.85);
+}
+
+/* النص */
+.navbar-custom a,
+.navbar-custom .navbar-brand{
+    color: white !important;
+    font-weight: 500;
+}
+
+/* الأزرار */
+.navbar-custom .btn{
+    border-radius: 10px;
+}
+
+/*change with scroll*/
+.scrolled{
+    background: rgba(38, 166, 154, 0.95);
+    backdrop-filter: blur(20px);
+}
+
+
+.service-card{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+text-align:center;
+}
+
+.service-icon{
+font-size:28px;
+color:#2aa198;
+margin-bottom:10px;
+}
+
+
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Navbar -->
+
+
+
+<nav class="navbar navbar-custom">
+
+<div class="container position-relative">
+
+    <!-- يمين -->
+    <div class="position-absolute end-0">
+
+        <a href="/services" class="btn btn-dark btn-sm me-2">Services</a>
+        <a href="/dashboard" class="btn btn-warning btn-sm me-2">Dashboard</a>
+        <a href="/logout" class="btn btn-danger btn-sm">Logout</a>
+            
+
+
+    </div>
+
+    <!-- الوسط -->
+    <div class="mx-auto text-center">
+
+        <img src="/static/logo.png" width="200"><br>
+        <span class="navbar-brand"><h1>Step for Public Services</h1></span>
+
+    </div>
+
+    <!-- يسار (بروفايل) -->
+    <div class="position-absolute start-0 d-flex align-items-center gap-2">
+
+        <i class="fas fa-user-circle" style="font-size:35px;"></i>
+        <a href="/profile" class="btn btn-dark btn-sm">Profile</a>
+        <a href="/contact" class="btn btn-dark btn-sm">Contact</a>
+        <a href="/about" class="btn btn-dark btn-sm">About</a>
+
+        <script>
+    window.addEventListener("scroll", function(){
+    let nav = document.querySelector(".navbar-custom");
+    if(window.scrollY > 50){
+        nav.classList.add("scrolled");
+    }else{
+        nav.classList.remove("scrolled");
+    }
+});
+</script>
+
+    </div>
+
+</div>
+
+</nav>
+
+<div class="container mt-5">
+
+<h2 class="text mb-5">Our Services</h2>
+
+<div class="row g-4">
+
+<!-- University -->
+
+<div class="col-md-4">
+
+<div class="service-card">
+
+<i class="fas fa-university service-icon"></i>
+
+<h5>University Admission</h5>
+
+<p class="text-muted small">
+Apply for university admission with our assistance.
+</p>
+
+<form action="/submit" method="POST">
+
+
+<input type="hidden" name="service" value="University Admission">
+
+
+<input type="text" name="name" class="form-control mb-2" placeholder="Full Name" required>
+
+<input type="text" name="university" class="form-control mb-2" placeholder="Country of University" required>
+
+<input type="text" name="university" class="form-control mb-2" placeholder="University Name" required>
+
+<div class="row g-2 mb-2">
+
+<div class="col-4">
+<select name="country_code" class="form-control">
+<option value="967">YE +967</option>
+<option value="966">SA +966</option>
+<option value="20">EG +20</option>
+<option value="971">AE +971</option>
+<option value="91">IN +91</option>
+<option value="90">Tu +90</option>
+</select>
+</div>
+
+<div class="col-8">
+<input type="text" name="phone" class="form-control" placeholder="Phone Number">
+</div>
+
+</div>
+
+<button class="btn btn-success w-100 mt-2">
+    Request Service
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<!-- Airline -->
+
+<div class="col-md-4">
+
+<div class="service-card">
+
+<i class="fas fa-plane service-icon"></i>
+
+<h5>Airline Tickets</h5>
+
+<p class="text-muted small">
+Book international or domestic flights easily.
+</p>
+
+<form action="/submit" method="POST">
+
+<input type="hidden" name="service" value="Airline Tickets">
+
+<input type="text" name="name" class="form-control mb-2" placeholder="Full Name">
+
+<div class="row g-2 mb-2">
+
+<div class="col-4">
+<select name="country_code" class="form-control">
+<option value="967">YE +967</option>
+<option value="966">SA +966</option>
+<option value="20">EG +20</option>
+<option value="971">AE +971</option>
+<option value="91">IN +91</option>
+<option value="90">Tu +90</option>
+</select>
+</div>
+
+<div class="col-8">
+<input type="text" name="phone" class="form-control" placeholder="Phone Number">
+</div>
+
+</div>
+
+<input type="text" name="from_city" class="form-control mb-2" placeholder="From City">
+
+<input type="text" name="destination" class="form-control mb-2" placeholder="Destination">
+
+<input type="date" name="travel_date" class="form-control mb-2">
+
+<select name="type" class="form-control mb-2">
+<option>One Way</option>
+<option>Round Trip</option>
+</select>
+
+
+<button class="btn btn-success w-100 mt-2">
+    Request Ticket
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<!-- Visa -->
+
+<div class="col-md-4">
+
+<div class="service-card">
+
+<i class="fas fa-passport service-icon"></i>
+
+<h5>Tourist Visa</h5>
+
+<p class="text-muted small">
+Apply for tourist visas to many countries.
+</p>
+
+<form action="/submit" method="POST">
+
+<input type="hidden" name="service" value="Tourist Visa">
+
+<input type="text" name="name" class="form-control mb-2" placeholder="Full Name">
+
+
+<div class="row g-2 mb-2">
+
+<div class="col-4">
+<select name="country_code" class="form-control">
+<option value="967">YE +967</option>
+<option value="966">SA +966</option>
+<option value="20">EG +20</option>
+<option value="971">AE +971</option>
+<option value="91">IN +91</option>
+<option value="90">Tu +90</option>
+</select>
+</div>
+
+<div class="col-8">
+<input type="text" name="phone" class="form-control" placeholder="Phone Number">
+</div>
+
+</div>
+
+<input type="text" name="His country" class="form-control mb-2" placeholder="Your Country">
+
+<input type="text" name="country" class="form-control mb-2" placeholder="Destination Country">
+
+<input type="text" name="passport" class="form-control mb-2" placeholder="Passport Number">
+
+<button class="btn btn-success w-100 mt-2">
+    Request Visa
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<!-- Money Transfer -->
+
+<div class="col-md-4">
+
+<div class="service-card">
+
+<i class="fas fa-money-bill-wave service-icon"></i>
+
+<h5>Money Transfer</h5>
+
+<p class="text-muted small">
+Send money internationally quickly and safely.
+</p>
+
+<form action="/submit" method="POST">
+
+<input type="hidden" name="service" value="Money Transfer">
+
+<input type="text" name="sender" class="form-control mb-2" placeholder="Sender Name" required>
+
+<input type="text" name="receiver" class="form-control mb-2" placeholder="Receiver Name" required>
+
+<input type="number" name="amount" class="form-control mb-2" placeholder="Amount" required>
+
+<input type="text" name="country" class="form-control mb-2" placeholder="Destination Country">
+
+<div class="row g-2 mb-2">
+
+<div class="col-4">
+<select name="country_code" class="form-control">
+<option value="967">YE +967</option>
+<option value="966">SA +966</option>
+<option value="20">EG +20</option>
+<option value="971">AE +971</option>
+<option value="91">IN +91</option>
+<option value="90">Tu +90</option>
+</select>
+</div>
+
+<div class="col-8">
+<input type="text" name="phone" class="form-control" placeholder="Phone Number">
+</div>
+
+</div>
+<button class="btn btn-success w-100 mt-2">
+    Transfer
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<!-- Insurance -->
+
+<div class="col-md-4">
+
+<div class="service-card">
+
+<i class="fas fa-heartbeat service-icon"></i>
+
+<h5>Health Insurance</h5>
+
+<p class="text-muted small">
+Medical insurance for travel and residence.
+</p>
+
+<form action="/submit" method="POST">
+
+<input type="hidden" name="service" value="Health Insurance">
+
+<input type="text" name="name" class="form-control mb-2" placeholder="Full Name">
+
+<div class="row g-2 mb-2">
+
+<div class="col-4">
+<select name="country_code" class="form-control">
+<option value="967">YE +967</option>
+<option value="966">SA +966</option>
+<option value="20">EG +20</option>
+<option value="971">AE +971</option>
+<option value="91">IN +91</option>
+<option value="90">Tu +90</option>
+</select>
+</div>
+
+<div class="col-8">
+<input type="text" name="phone" class="form-control" placeholder="Phone Number">
+</div>
+
+</div>
+
+<input type="number" name="age" class="form-control mb-2" placeholder="Age">
+
+<input type="text" name="country" class="form-control mb-2" placeholder="Insurance Country">
+
+<button class="btn btn-success w-100 mt-2">
+    Request Insurance
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<!-- Umrah -->
+
+<div class="col-md-4">
+
+<div class="service-card">
+
+<i class="fas fa-kaaba service-icon"></i>
+
+<h5>Umrah Visa</h5>
+
+<form action="/submit" method="POST">
+
+<input type="hidden" name="service" value="Umrah Visa">
+
+<input type="text" name="name" class="form-control mb-2" placeholder="Full Name">
+
+<input type="text" name="country" class="form-control mb-2" placeholder="Your country">
+
+<input type="text" name="passport" class="form-control mb-2" placeholder="Passport Number">
+
+<input type="date" name="travel_date" class="form-control mb-2">
+
+<div class="row g-2 mb-2">
+
+<div class="col-4">
+<select name="country_code" class="form-control">
+<option value="967">YE +967</option>
+<option value="966">SA +966</option>
+<option value="20">EG +20</option>
+<option value="971">AE +971</option>
+<option value="91">IN +91</option>
+<option value="90">Tu +90</option>
+</select>
+</div>
+
+<div class="col-8">
+<input type="text" name="phone" class="form-control" placeholder="Phone Number">
+</div>
+
+</div>
+
+<button class="btn btn-success w-100 mt-2">
+    Request Service
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<!--- Oman --->
+
+
+
+    <!-- باقي الخدمات هنا -->
+
+    <!-- Oman Visa -->
+    <div class="col-md-4">
+        <div class="service-card">
+
+            <i class="fas fa-id-card service-icon"></i>
+
+            <h5>Oman Visa</h5>
+
+            <p class="text-muted small">
+            Apply for Oman visas easily.
+            </p>
+
+            <form action="/submit" method="POST">
+
+            <input type="hidden" name="service" value="Oman Visa">
+
+            <input type="text" name="name" class="form-control mb-2" placeholder="Full Name" required>
+
+            <div class="row g-2 mb-2">
+
+                <div class="col-4">
+                    <select name="country_code" class="form-control">
+                        <option value="967">YE +967</option>
+                        <option value="966">SA +966</option>
+                        <option value="20">EG +20</option>
+                        <option value="971">AE +971</option>
+                    </select>
+                </div>
+
+                <div class="col-8">
+                    <input type="text" name="phone" class="form-control" placeholder="Phone Number" required>
+                </div>
+
+            </div>
+
+            <select name="visa_type" class="form-control mb-2" required>
+                <option value="">Select Visa Type</option>
+                <option>Transit</option>
+                <option>Multiple Visit</option>
+                <option>Investor</option>
+            </select>
+
+            <button class="btn btn-success w-100">
+            Request Visa
+            </button>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+</div>
+
+</div>
+
+
+
+
+
+
+</body>
+</html>
